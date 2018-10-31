@@ -46,7 +46,7 @@
         </b-row>
         <b-row class="mt-5">
           <b-col>
-            <vue-slider v-model="priceRange.value" 
+            <vue-slider v-model="priceRange.value"
                         :min="priceRange.min"
                         :max="priceRange.max"
                         formatter="£{value}"
@@ -54,7 +54,7 @@
             <!-- <b-form-input v-model="maxTime" :min="minMaxTime" :max="maxMaxTime" type="range" /> -->
           </b-col>
         </b-row>
-        
+
         <b-row class="mt-5 mb-2">
           <b-col>Airlines</b-col>
         </b-row>
@@ -67,7 +67,7 @@
       </b-card>
     </b-col>
     <b-col>
-      <flight-card class="my-4" v-for="i in 5" :key="i"></flight-card>
+      <flight-card class="my-4" v-for="i in 5" :key="i" :flight="flight"></flight-card>
     </b-col>
   </b-row>
 </template>
@@ -94,13 +94,36 @@ export default {
         { value: 2, text: '2+' }
       ],
       airlines: [
-        {text: 'Easy Jet', value: 'easyjet'},
-        {text: 'British Airways', value: 'ba'},
-        {text: 'American Airlines', value: 'aa'},
-        {text: 'Fly Be', value: 'flybe'},
-        {text: 'Ryan Air', value: 'ryanair'}
+        { text: 'Easy Jet', value: 'easyjet' },
+        { text: 'British Airways', value: 'ba' },
+        { text: 'American Airlines', value: 'aa' },
+        { text: 'Fly Be', value: 'flybe' },
+        { text: 'Ryan Air', value: 'ryanair' }
       ],
-      selectedAirlines: []
+      selectedAirlines: [],
+      flight: {
+        outbound: {
+          departureDate: '2018-10-31',
+          arrivalDate: '2018-10-31',
+          departureTime: '08:15',
+          arrivalTime: '17:00',
+          airline: 'Easy Jet',
+          stops: ['LGW', 'LHR'],
+          from: 'MAN',
+          to: 'LAX'
+        },
+        return: {
+          departureDate: '2018-10-31',
+          arrivalDate: '2018-10-31',
+          departureTime: '08:15',
+          arrivalTime: '17:00',
+          airline: 'Easy Jet',
+          stops: ['LGW', 'LHR'],
+          from: 'MAN',
+          to: 'LAX'
+        },
+        price: '200'
+      }
     }
   },
   components: {
