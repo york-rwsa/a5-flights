@@ -17,6 +17,22 @@
     "stops": []
   },
   {
+    "airline": "Air Europa",
+    "stops": []
+  },
+  {
+    "airline": "Air Europa",
+    "stops": []
+  },
+  {
+    "airline": "Air Europa",
+    "stops": []
+  },
+  {
+    "airline": "Air Europa",
+    "stops": []
+  },
+  {
     "airline": "Norwegian",
     "stops": [
       "HKG",
@@ -31,6 +47,18 @@
       "HKG",
       "CAN"
     ]
+  },
+  {
+    "airline": "Scandinavian",
+    "stops": []
+  },
+  {
+    "airline": "Scandinavian",
+    "stops": []
+  },
+  {
+    "airline": "Scandinavian",
+    "stops": []
   },
   {
     "airline": "Scandinavian",
@@ -52,10 +80,7 @@
   },
   {
     "airline": "Air France",
-    "stops": [
-      "LAX",
-      "MAN"
-    ]
+    "stops": []
   },
   {
     "airline": "Scandinavian",
