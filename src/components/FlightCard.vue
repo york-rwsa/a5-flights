@@ -10,7 +10,7 @@
             <b-row>
               <b-col><p><b>{{ flight.outbound.departureTime }} - {{ flight.outbound.arrivalTime }}</b></p></b-col>
               <b-col><p><b>{{ flight.outbound.stops.length }} stops</b></p></b-col>
-              <b-col><p><b>{{ flightTime.outbound }} hours</b></p></b-col>
+              <b-col><p><b>{{ flightTime.outbound | nearestQuarter }} hours</b></p></b-col>
             </b-row>
             <b-row>
               <b-col><p>{{ flight.outbound.airline }}</p></b-col>
@@ -28,7 +28,7 @@
             <b-row>
               <b-col><p><b>{{ flight.return.departureTime }} - {{ flight.return.arrivalTime }}</b></p></b-col>
               <b-col><p><b>{{ flight.return.stops.length }} stops</b></p></b-col>
-              <b-col><p><b>{{ flightTime.return }} hours</b></p></b-col>
+              <b-col><p><b>{{ flightTime.return | nearestQuarter }} hours</b></p></b-col>
             </b-row>
             <b-row>
               <b-col><p>{{ flight.return.airline }}</p></b-col>
@@ -52,6 +52,11 @@ import moment from 'moment'
 export default {
   props: {
     flight: Object
+  },
+  filters: {
+    nearestQuarter: function (value) {
+      return parseFloat((Math.round(value * 4) / 4).toFixed(2)).toString()
+    }
   },
   computed: {
     withReturn: function () {

@@ -67,14 +67,16 @@
       </b-card>
     </b-col>
     <b-col>
-      <flight-card class="my-4" v-for="i in 5" :key="i" :flight="flight"></flight-card>
+      <flight-card class="my-4" v-for="(flight, index) in flights" :key="index" :flight="flight"></flight-card>
     </b-col>
   </b-row>
 </template>
 
 <script>
+import moment from 'moment'
 import FlightCard from '@/components/FlightCard'
 import vueSlider from 'vue-slider-component'
+import flights from '@/misc/flights.json'
 
 export default {
   data () {
@@ -101,29 +103,7 @@ export default {
         { text: 'Ryan Air', value: 'ryanair' }
       ],
       selectedAirlines: [],
-      flight: {
-        outbound: {
-          departureDate: '2018-10-31',
-          arrivalDate: '2018-10-31',
-          departureTime: '08:15',
-          arrivalTime: '17:00',
-          airline: 'Easy Jet',
-          stops: ['LGW', 'LHR'],
-          from: 'MAN',
-          to: 'LAX'
-        },
-        return: {
-          departureDate: '2018-10-31',
-          arrivalDate: '2018-10-31',
-          departureTime: '08:15',
-          arrivalTime: '17:00',
-          airline: 'Easy Jet',
-          stops: ['LGW', 'LHR'],
-          from: 'MAN',
-          to: 'LAX'
-        },
-        price: '200'
-      }
+      flights: {}
     }
   },
   components: {
@@ -135,8 +115,53 @@ export default {
       return this.airlines.map(x => x.value)
     }
   },
+  methods: {
+    genFlight: function(from, to, date, hourRange) {
+      let flightpath = flights[Math.floor(Math.random()*flights.length)]
+      let departureTime = Math.floor(Math.random() * (24)) + ':' + Math.floor(Math.random() * (60))
+      let departureDateTime = moment(date + ' ' + departureTime)
+      let flightTime = (Math.ceil((Math.random() * (hourRange.max - hourRange.min) + hourRange.min)*20)/20).toFixed(2)
+      let arrivalDateTime = moment(departureDateTime).add(parseFloat(flightTime), 'hours')
+
+      return {
+        departureDateTime,
+        arrivalDateTime,
+        departureDate: departureDateTime.format('YYYY-MM-DD'),
+        arrivalDate: arrivalDateTime.format('YYYY-MM-DD'),
+        departureTime: departureDateTime.format('HH:MM'),
+        arrivalTime: arrivalDateTime.format('HH:MM'),
+        airline: flightpath.airline,
+        stops: flightpath.stops,
+        from,
+        to
+      }
+    },
+    genFlights: function () {
+      let search = {
+        from: 'LAX',
+        to: 'MAN',
+        outboundDate: '2018-10-31',
+        returnDate: '2018-11-15'
+      }
+      let hourRange = {min: 2, max: 22}
+      let withReturn = search.returnDate !== null
+
+      let flights = []
+      
+      for (let i = 0; i < 12; i++) {
+        flights.push({
+          outbound: this.genFlight(search.from, search.to, search.outboundDate, hourRange),
+          return: this.genFlight(search.from, search.to, search.returnDate, hourRange),
+          price: Math.floor(Math.random() * (500 - 100) + 100)
+        })
+      }
+
+      return flights
+    }
+  },
   mounted: function () {
     this.selectedAirlines = this.airlines.map(x => x.value)
+    this.flights = this.genFlights()
   }
 }
 </script>

@@ -1,0 +1,68 @@
+[
+  {
+    "airline": "Air Europa",
+    "stops": [
+      "JFK",
+      "LAX"
+    ]
+  },
+  {
+    "airline": "Finnair",
+    "stops": [
+      "HKG"
+    ]
+  },
+  {
+    "airline": "Air Europa",
+    "stops": []
+  },
+  {
+    "airline": "Norwegian",
+    "stops": [
+      "HKG",
+      "LGW",
+      "MAN"
+    ]
+  },
+  {
+    "airline": "Turkish Airlines",
+    "stops": [
+      "LHR",
+      "HKG",
+      "CAN"
+    ]
+  },
+  {
+    "airline": "Scandinavian",
+    "stops": []
+  },
+  {
+    "airline": "easyJet",
+    "stops": [
+      "MAN",
+      "CAN"
+    ]
+  },
+  {
+    "airline": "Finnair",
+    "stops": [
+      "MAN",
+      "CAN"
+    ]
+  },
+  {
+    "airline": "Air France",
+    "stops": [
+      "LAX",
+      "MAN"
+    ]
+  },
+  {
+    "airline": "Scandinavian",
+    "stops": [
+      "LGW",
+      "HKG",
+      "CAN"
+    ]
+  }
+]
