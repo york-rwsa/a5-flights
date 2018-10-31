@@ -1,5 +1,5 @@
 <template>
-  <b-row>
+  <b-row class="my-3">
     <b-col></b-col>
     <b-col cols="8">
       <b-card no-body>
@@ -37,12 +37,12 @@
               <b-row class="my-3">
                 <b-col>
                   <b-input-group prepend="Adults: ">
-                    <b-form-input type="number" min="0" v-model="adults"></b-form-input>
+                    <b-form-input type="number" pattern="\d*" min="0" v-model="adults"></b-form-input>
                   </b-input-group>
                 </b-col>
                 <b-col>
                   <b-input-group prepend="Children: ">
-                    <b-form-input type="number" min="0" v-model="children"></b-form-input>
+                    <b-form-input type="number" pattern="\d*" min="0" v-model="children"></b-form-input>
                   </b-input-group>
                 </b-col>
                 <b-col>

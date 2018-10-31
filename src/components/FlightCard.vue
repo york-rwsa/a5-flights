@@ -39,7 +39,7 @@
         </b-row>
       </b-col>
       <b-col cols="2" class="d-flex align-items-end flex-column">
-        <h4 class="mb-auto">£20</h4>
+        <h2 class="mb-auto">£20</h2>
         <b-button class="">Book Now!</b-button>
       </b-col>
     </b-row>
