@@ -89,11 +89,6 @@ export default {
         { value: 2, text: '2+' }
       ],
       airlines: [
-        { text: 'Easy Jet', value: 'easyjet' },
-        { text: 'British Airways', value: 'ba' },
-        { text: 'American Airlines', value: 'aa' },
-        { text: 'Fly Be', value: 'flybe' },
-        { text: 'Ryan Air', value: 'ryanair' }
       ],
       selectedAirlines: [],
       flights: []
@@ -112,11 +107,12 @@ export default {
         let dirs = ['outbound', 'return']
         for (const x in ['outbound', 'return']) {
           let flight = item[dirs[x]] || null
+
           if (flight == null) { continue }
 
           if (this.maxStops !== 2 && flight.stops.length > this.maxStops) { return false }
-
           if (flight.duration > this.maxTime) { return false }
+          if (!this.selectedAirlines.includes(flight.airline)) { return false }
         }
 
         if (item.price > this.priceRange.value[1] || item.price < this.priceRange.value[0]) { return false }
@@ -159,7 +155,7 @@ export default {
 
       let flights = []
 
-      for (let i = 0; i < 12; i++) {
+      for (let i = 0; i < 30; i++) {
         flights.push({
           outbound: this.genFlight(search.from, search.to, search.outboundDate, hourRange),
           return: this.genFlight(search.to, search.from, search.returnDate, hourRange),
@@ -171,8 +167,11 @@ export default {
     }
   },
   mounted: function () {
-    this.selectedAirlines = this.airlines.map(x => x.value)
     this.flights = this.genFlights()
+
+    this.airlines = [...(new Set([...(this.flights.map(x => x.outbound.airline)),
+                                  ...(this.flights.map(x => x.return.airline))]))]
+    this.selectedAirlines = this.airlines
   }
 }
 </script>
