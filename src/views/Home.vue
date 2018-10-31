@@ -4,37 +4,44 @@
     <b-col cols="8">
       <b-card no-body>
         <b-tabs card>
-          <b-tab title="Single" active>
+          <b-tab title="Flights" active>
             <b-form>
-              <b-row class="my-3">
+              <b-row class="mb-4">
                 <b-col>
-                  <b-row>
+                  <b-row class="align-items-center">
                     <b-col><label for="from">From</label></b-col>
                     <b-col cols="8"><b-form-input id="from" type="text" placeholder="Enter an airport or city"></b-form-input></b-col>
                   </b-row>
                 </b-col>
                 <b-col>
-                  <b-row>
+                  <b-row class="align-items-center">
                     <b-col><label for="from">Outbound Date</label></b-col>
                     <b-col cols="7"><b-form-input type="date" v-model="outboundDate"></b-form-input></b-col>
                   </b-row>
                 </b-col>
               </b-row>
-              <b-row class="my-3">
+              <b-row class="my-4">
                 <b-col>
-                  <b-row>
+                  <b-row class="align-items-center">
                     <b-col><label for="from">To</label></b-col>
                     <b-col cols="8"><b-form-input id="from" type="text" placeholder="Enter an airport or city"></b-form-input></b-col>
                   </b-row>
                 </b-col>
                 <b-col>
-                  <b-row>
+                  <b-row v-if="addReturn" class="align-items-center">
                     <b-col><label for="from">Return Date</label></b-col>
                     <b-col cols="7"><b-form-input type="date" v-model="returnDate"></b-form-input></b-col>
                   </b-row>
+                  <b-row v-if="!addReturn" class="align-items-center">
+                    <b-col></b-col>
+                    <b-col>
+                      <b-button class="" @click="addReturn = true">Add Return</b-button>
+                    </b-col>
+                    <b-col></b-col>
+                  </b-row>
                 </b-col>
               </b-row>
-              <b-row class="my-3">
+              <b-row class="mt-4">
                 <b-col>
                   <b-input-group prepend="Adults: ">
                     <b-form-input type="number" pattern="\d*" min="0" v-model="adults"></b-form-input>
@@ -52,8 +59,8 @@
               </b-row>
             </b-form>
           </b-tab>
-          <b-tab title="Return">
-            Tab Contents 2
+          <b-tab title="Hotels">
+            not implemented
           </b-tab>
         </b-tabs>
       </b-card>
@@ -68,6 +75,7 @@ import moment from 'moment'
 export default {
   data () {
     return {
+      addReturn: false,
       outboundDate: moment().format('YYYY-MM-DD'),
       returnDate: moment().add(1, 'days').format('YYYY-MM-DD'),
       adults: 1,
@@ -87,3 +95,9 @@ export default {
   }
 }
 </script>
+
+<style>
+label {
+  margin-bottom: 0;
+}
+</style>
