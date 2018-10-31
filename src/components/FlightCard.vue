@@ -10,7 +10,7 @@
             <b-row>
               <b-col><p><b>{{ flight.outbound.departureTime }} - {{ flight.outbound.arrivalTime }}</b></p></b-col>
               <b-col><p><b>{{ flight.outbound.stops.length }} stops</b></p></b-col>
-              <b-col><p><b>{{ flightTime.outbound | nearestQuarter }} hours</b></p></b-col>
+              <b-col><p><b>{{ flight.outbound.duration | nearestQuarter }} hours</b></p></b-col>
             </b-row>
             <b-row>
               <b-col><p>{{ flight.outbound.airline }}</p></b-col>
@@ -28,7 +28,7 @@
             <b-row>
               <b-col><p><b>{{ flight.return.departureTime }} - {{ flight.return.arrivalTime }}</b></p></b-col>
               <b-col><p><b>{{ flight.return.stops.length }} stops</b></p></b-col>
-              <b-col><p><b>{{ flightTime.return | nearestQuarter }} hours</b></p></b-col>
+              <b-col><p><b>{{ flight.return.duration | nearestQuarter }} hours</b></p></b-col>
             </b-row>
             <b-row>
               <b-col><p>{{ flight.return.airline }}</p></b-col>
@@ -61,29 +61,6 @@ export default {
   computed: {
     withReturn: function () {
       return typeof this.flight.return !== 'undefined'
-    },
-    flightTime: function () {
-      let outboundDateTime = {
-        departure: moment(this.flight.outbound.departureDate + ' ' + this.flight.outbound.departureTime),
-        arrival: moment(this.flight.outbound.arrivalDate + ' ' + this.flight.outbound.arrivalTime)
-      }
-      let outboundTime = (moment.duration(outboundDateTime.arrival.diff(outboundDateTime.departure))).asHours()
-
-      let returnTime = null
-
-      if (this.withReturn) {
-        let returnDateTime = {
-          departure: moment(this.flight.return.departureDate + ' ' + this.flight.return.departureTime),
-          arrival: moment(this.flight.return.arrivalDate + ' ' + this.flight.return.arrivalTime)
-        }
-
-        returnTime = (moment.duration(returnDateTime.arrival.diff(returnDateTime.departure))).asHours()
-      }
-
-      return {
-        outbound: outboundTime,
-        return: returnTime
-      }
     }
   }
 }
