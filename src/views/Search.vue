@@ -67,7 +67,13 @@
       </b-card>
     </b-col>
     <b-col>
-      <flight-card class="my-4" v-for="(flight, index) in flights" :key="index" :flight="flight"></flight-card>
+      <v-data-iterator
+        :items="flights">
+        <div slot="item" slot-scope="props">
+        <flight-card class="my-4" :flight="props.item"></flight-card>
+
+        </div>
+      </v-data-iterator>
     </b-col>
   </b-row>
 </template>
@@ -76,7 +82,7 @@
 import moment from 'moment'
 import FlightCard from '@/components/FlightCard'
 import vueSlider from 'vue-slider-component'
-import flights from '@/misc/flights.json'
+import flighpaths from '@/misc/flights.json'
 
 export default {
   data () {
@@ -103,7 +109,7 @@ export default {
         { text: 'Ryan Air', value: 'ryanair' }
       ],
       selectedAirlines: [],
-      flights: {}
+      flights: []
     }
   },
   components: {
@@ -116,11 +122,11 @@ export default {
     }
   },
   methods: {
-    genFlight: function(from, to, date, hourRange) {
-      let flightpath = flights[Math.floor(Math.random()*flights.length)]
+    genFlight: function (from, to, date, hourRange) {
+      let flightpath = flighpaths[Math.floor(Math.random() * flighpaths.length)]
       let departureTime = Math.floor(Math.random() * (24)) + ':' + Math.floor(Math.random() * (60))
       let departureDateTime = moment(date + ' ' + departureTime)
-      let flightTime = (Math.ceil((Math.random() * (hourRange.max - hourRange.min) + hourRange.min)*20)/20).toFixed(2)
+      let flightTime = (Math.ceil((Math.random() * (hourRange.max - hourRange.min) + hourRange.min) * 20) / 20).toFixed(2)
       let arrivalDateTime = moment(departureDateTime).add(parseFloat(flightTime), 'hours')
 
       return {
@@ -143,11 +149,11 @@ export default {
         outboundDate: '2018-10-31',
         returnDate: '2018-11-15'
       }
-      let hourRange = {min: 2, max: 22}
+      let hourRange = { min: 2, max: 22 }
       let withReturn = search.returnDate !== null
 
       let flights = []
-      
+
       for (let i = 0; i < 12; i++) {
         flights.push({
           outbound: this.genFlight(search.from, search.to, search.outboundDate, hourRange),
