@@ -5,7 +5,13 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-
+    flightSearch: {
+      from: '',
+      to: '',
+      return: true,
+      outboundDate: '',
+      returnDate: ''
+    }
   },
   mutations: {
 
