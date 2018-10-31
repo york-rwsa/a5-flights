@@ -124,7 +124,7 @@ export default {
   methods: {
     genFlight: function (from, to, date, hourRange) {
       let flightpath = flighpaths[Math.floor(Math.random() * flighpaths.length)]
-      let departureTime = Math.floor(Math.random() * (24)) + ':' + Math.floor(Math.random() * (60))
+      let departureTime = (Math.floor(Math.random() * (24))).toString().padStart(2, '0') + ':' + Math.floor(Math.random() * (60)).toString().padStart(2, '0')
       let departureDateTime = moment(date + ' ' + departureTime)
       let flightTime = (Math.ceil((Math.random() * (hourRange.max - hourRange.min) + hourRange.min) * 20) / 20).toFixed(2)
       let arrivalDateTime = moment(departureDateTime).add(parseFloat(flightTime), 'hours')

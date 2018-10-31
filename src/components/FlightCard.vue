@@ -90,9 +90,7 @@ export default {
 </script>
 
 <style>
-.pull-bottom {
-    display: inline-block;
-    vertical-align: bottom;
-    float: none;
+.d-flex > button {
+  flex: 0 0 auto !important;
 }
 </style>

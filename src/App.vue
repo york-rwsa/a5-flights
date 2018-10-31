@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" data-app>
     <b-navbar toggleable="md" type="dark" variant="dark">
       <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
       <b-navbar-brand to="/">A5 Flights</b-navbar-brand>
