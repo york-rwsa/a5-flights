@@ -5,8 +5,6 @@
       <b-navbar-brand to="/">A5 Flights</b-navbar-brand>
       <b-collapse is-nav id="nav_collapse">
         <b-navbar-nav>
-          <b-nav-item to="/">Home</b-nav-item>
-          <b-nav-item to="#">Hotels</b-nav-item>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
