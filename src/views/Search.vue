@@ -2,16 +2,6 @@
   <b-row class="my-3">
     <b-col cols="3" class="my-4">
       <b-card title="Filter Results">
-        <!-- <b-card no-body class="mb-1">
-          <b-card-header header-tag="header" class="p-1" role="tab">
-            <b-btn block v-b-toggle.stopsCard variant="info">Stops</b-btn>
-          </b-card-header>
-          <b-collapse id="stopsCard" visible>
-            <b-card>
-              sup
-            </b-card>
-          </b-collapse>
-        </b-card> -->
         <b-row class="align-items-center my-3">
           <b-col>
             <label for="maxStops" class="mb-0">Max Stops</label>
@@ -32,7 +22,6 @@
         <b-row>
           <b-col>
             <vue-slider tooltip="false" v-model="maxTime" :min="minMaxTime" :max="maxMaxTime"></vue-slider>
-            <!-- <b-form-input v-model="maxTime" :min="minMaxTime" :max="maxMaxTime" type="range" /> -->
           </b-col>
         </b-row>
 
@@ -41,7 +30,6 @@
             <label for="maxPrice" class="mb-0">Max Price</label>
           </b-col>
           <b-col>
-            <!-- <span class="float-right">{{ maxTime }} hours</span> -->
           </b-col>
         </b-row>
         <b-row class="mt-5">
@@ -51,7 +39,6 @@
                         :max="priceRange.max"
                         formatter="£{value}"
                         id="maxPrice"></vue-slider>
-            <!-- <b-form-input v-model="maxTime" :min="minMaxTime" :max="maxMaxTime" type="range" /> -->
           </b-col>
         </b-row>
 
@@ -68,7 +55,7 @@
     </b-col>
     <b-col>
       <v-data-iterator
-        :items="flights">
+        :items="filteredFlights">
         <div slot="item" slot-scope="props">
         <flight-card class="my-4" :flight="props.item"></flight-card>
 
@@ -119,6 +106,23 @@ export default {
   computed: {
     airlineVals: function () {
       return this.airlines.map(x => x.value)
+    },
+    filteredFlights: function () {
+      return this.flights.filter((item) => {
+        let dirs = ['outbound', 'return']
+        for (const x in ['outbound', 'return']) {
+          let flight = item[dirs[x]] || null
+          if (flight == null) { continue }
+
+          if (this.maxStops !== 2 && flight.stops.length > this.maxStops) { return false }
+
+          if (flight.duration > this.maxTime) { return false }
+        }
+
+        if (item.price > this.priceRange.value[1] || item.price < this.priceRange.value[0]) { return false }
+
+        return true
+      })
     }
   },
   methods: {
@@ -132,6 +136,7 @@ export default {
       return {
         departureDateTime,
         arrivalDateTime,
+        duration: moment.duration(arrivalDateTime.diff(departureDateTime)).asHours(),
         departureDate: departureDateTime.format('YYYY-MM-DD'),
         arrivalDate: arrivalDateTime.format('YYYY-MM-DD'),
         departureTime: departureDateTime.format('HH:MM'),
@@ -150,14 +155,14 @@ export default {
         returnDate: '2018-11-15'
       }
       let hourRange = { min: 2, max: 22 }
-      let withReturn = search.returnDate !== null
+      // let withReturn = search.returnDate !== null
 
       let flights = []
 
       for (let i = 0; i < 12; i++) {
         flights.push({
           outbound: this.genFlight(search.from, search.to, search.outboundDate, hourRange),
-          return: this.genFlight(search.from, search.to, search.returnDate, hourRange),
+          return: this.genFlight(search.to, search.from, search.returnDate, hourRange),
           price: Math.floor(Math.random() * (500 - 100) + 100)
         })
       }
