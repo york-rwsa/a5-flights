@@ -19,7 +19,7 @@
             </b-row>
           </b-col>
         </b-row>
-        <hr/>
+        <hr v-if="withReturn" />
         <b-row class="align-items-center" v-if="withReturn">
           <b-col cols="3">
             <span class="align-middle"><b>RETURN</b></span>
@@ -40,7 +40,7 @@
       </b-col>
       <b-col cols="2" class="d-flex align-items-end flex-column">
         <h2 class="mb-auto">£{{ flight.price }}</h2>
-        <b-button class="">Book Now!</b-button>
+        <b-button class="mt-3">Book Now!</b-button>
       </b-col>
     </b-row>
   </b-card>

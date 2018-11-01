@@ -127,9 +127,8 @@ export default {
     filteredFlights: function () {
       return this.sortedList.filter((item) => {
         let dirs = ['outbound', 'return']
-        for (const x in ['outbound', 'return']) {
+        for (let x = 0; x < 2; x++) {
           let flight = item[dirs[x]] || null
-
           if (flight == null) { continue }
 
           if (this.maxStops !== 2 && flight.stops.length > this.maxStops) { return false }
@@ -174,26 +173,45 @@ export default {
       // }
       let search = this.$store.state.flightSearch
       let hourRange = { min: 2, max: 22 }
-      // let withReturn = search.returnDate !== null
+      let withReturn = (search.returnDate !== null)
 
       let flights = []
 
       for (let i = 0; i < 30; i++) {
-        flights.push({
+        let flight = {
           outbound: this.genFlight(search.from, search.to, search.outboundDate, hourRange),
-          return: this.genFlight(search.to, search.from, search.returnDate, hourRange),
           price: Math.floor(Math.random() * (500 - 100) + 100)
-        })
+        }
+
+        if (withReturn) {
+          flight = { 
+            ...flight,
+            return: this.genFlight(search.to, search.from, search.returnDate, hourRange)
+          }
+        }
+
+        flights.push(flight)
       }
 
       return flights
     }
   },
   mounted: function () {
+    if (this.$store.state.flightSearch.outboundDate === "") {
+      this.$router.push('/')
+    }
+
     this.flights = this.genFlights()
 
-    this.airlines = [...(new Set([...(this.flights.map(x => x.outbound.airline)),
-      ...(this.flights.map(x => x.return.airline))]))]
+    let airlines = new Set()
+    this.flights.forEach(function(el) {
+      airlines.add(el.outbound.airline)
+      if (typeof el.return !== 'undefined') {
+        airlines.add(el.return.airline)
+      }
+    })
+    
+    this.airlines = [...airlines]
     this.selectedAirlines = this.airlines
   }
 }
