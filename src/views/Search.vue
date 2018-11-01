@@ -1,7 +1,19 @@
 <template>
   <b-container>
-    <b-row>
-      <b-col></b-col>
+    <b-row class="align-items-center">
+      <b-col cols="3"></b-col>
+      <b-col>
+        <b-card>
+          <b-row>
+            <b-col>
+              <b>{{ search.from }}</b> 
+              to <b>{{ search.to }}</b>
+              on {{ search.outboundDate }}
+              <span v-if="withReturn">, returning on {{ search.returnDate }}</span>
+            </b-col>
+          </b-row>
+        </b-card>
+      </b-col>
       <b-col cols="2"><b-form-select v-model="sortOption" :options="sortOptions"></b-form-select></b-col>
     </b-row>
     <b-row>
@@ -81,6 +93,7 @@ import flighpaths from '@/misc/flights.json'
 export default {
   data () {
     return {
+      search: {},
       priceRange: {
         value: [0, 1000],
         min: 0,
@@ -114,6 +127,9 @@ export default {
     vueSlider
   },
   computed: {
+    withReturn: function () {
+      return (this.search.returnDate !== null)
+    },
     airlineVals: function () {
       return this.airlines.map(x => x.value)
     },
@@ -171,7 +187,7 @@ export default {
       //   outboundDate: '2018-10-31',
       //   returnDate: '2018-11-15'
       // }
-      let search = this.$store.state.flightSearch
+      let search = this.search
       let hourRange = { min: 2, max: 22 }
       let withReturn = (search.returnDate !== null)
 
@@ -201,6 +217,7 @@ export default {
       this.$router.push('/')
     }
 
+    this.search = this.$store.state.flightSearch
     this.flights = this.genFlights()
 
     let airlines = new Set()
