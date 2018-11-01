@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <b-row class="align-items-center">
+    <b-row class="align-items-center mt-1">
       <b-col cols="3"></b-col>
       <b-col>
         <b-card>
