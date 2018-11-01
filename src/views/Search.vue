@@ -6,7 +6,7 @@
         <b-card>
           <b-row>
             <b-col>
-              <b>{{ search.from }}</b> 
+              <b>{{ search.from }}</b>
               to <b>{{ search.to }}</b>
               on {{ search.outboundDate }}
               <span v-if="withReturn">, returning on {{ search.returnDate }}</span>
@@ -200,7 +200,7 @@ export default {
         }
 
         if (withReturn) {
-          flight = { 
+          flight = {
             ...flight,
             return: this.genFlight(search.to, search.from, search.returnDate, hourRange)
           }
@@ -213,7 +213,7 @@ export default {
     }
   },
   mounted: function () {
-    if (this.$store.state.flightSearch.outboundDate === "") {
+    if (this.$store.state.flightSearch.outboundDate === '') {
       this.$router.push('/')
     }
 
@@ -221,13 +221,13 @@ export default {
     this.flights = this.genFlights()
 
     let airlines = new Set()
-    this.flights.forEach(function(el) {
+    this.flights.forEach(function (el) {
       airlines.add(el.outbound.airline)
       if (typeof el.return !== 'undefined') {
         airlines.add(el.return.airline)
       }
     })
-    
+
     this.airlines = [...airlines]
     this.selectedAirlines = this.airlines
   }

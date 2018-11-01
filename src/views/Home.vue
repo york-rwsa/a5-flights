@@ -101,6 +101,14 @@ export default {
       this.addReturn = true
       this.returnDate = moment(this.outboundDate).add(1, 'days').format('YYYY-MM-DD')
     }
+  },
+  mounted () {
+    if (this.$store.state.flightSearch.outboundDate !== '') {
+      this.from = this.$store.state.flightSearch.from
+      this.to = this.$store.state.flightSearch.to
+      this.outboundDate = this.$store.state.flightSearch.outboundDate
+      this.returnDate = this.$store.state.flightSearch.returnDate
+    }
   }
 }
 </script>
