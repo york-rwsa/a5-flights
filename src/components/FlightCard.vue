@@ -47,8 +47,6 @@
 </template>
 
 <script>
-import moment from 'moment'
-
 export default {
   props: {
     flight: Object

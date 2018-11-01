@@ -8,15 +8,13 @@ export default new Vuex.Store({
     flightSearch: {
       from: '',
       to: '',
-      return: true,
       outboundDate: '',
-      returnDate: ''
+      returnDate: null
     }
   },
   mutations: {
-
-  },
-  actions: {
-
+    updateSearch (state, { from, to, outboundDate, returnDate }) {
+      state.flightSearch = { from, to, outboundDate, returnDate }
+    }
   }
 })

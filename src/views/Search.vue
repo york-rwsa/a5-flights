@@ -118,10 +118,11 @@ export default {
       return this.airlines.map(x => x.value)
     },
     sortedList: function () {
-      if (this.sortOption === null)
+      if (this.sortOption === null) {
         return this.flights
-      else
+      } else {
         return _.orderBy(this.flights, this.sortOption[0], this.sortOption[1])
+      }
     },
     filteredFlights: function () {
       return this.sortedList.filter((item) => {
@@ -165,12 +166,13 @@ export default {
       }
     },
     genFlights: function () {
-      let search = {
-        from: 'LAX',
-        to: 'MAN',
-        outboundDate: '2018-10-31',
-        returnDate: '2018-11-15'
-      }
+      // let search = {
+      //   from: 'LAX',
+      //   to: 'MAN',
+      //   outboundDate: '2018-10-31',
+      //   returnDate: '2018-11-15'
+      // }
+      let search = this.$store.state.flightSearch
       let hourRange = { min: 2, max: 22 }
       // let withReturn = search.returnDate !== null
 
