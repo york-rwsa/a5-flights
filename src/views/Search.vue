@@ -1,72 +1,79 @@
 <template>
-  <b-row class="my-3">
-    <b-col cols="3" class="my-4">
-      <b-card title="Filter Results">
-        <b-row class="align-items-center my-3">
-          <b-col>
-            <label for="maxStops" class="mb-0">Max Stops</label>
-          </b-col>
-          <b-col>
-            <b-form-select v-model="maxStops" :options="maxStopsOptions" />
-          </b-col>
-        </b-row>
+  <b-container>
+    <b-row>
+      <b-col></b-col>
+      <b-col cols="2"><b-form-select v-model="sortOption" :options="sortOptions"></b-form-select></b-col>
+    </b-row>
+    <b-row>
+      <b-col cols="3" class="my-4">
+        <b-card title="Filter Results">
+          <b-row class="align-items-center my-3">
+            <b-col>
+              <label for="maxStops" class="mb-0">Max Stops</label>
+            </b-col>
+            <b-col>
+              <b-form-select v-model="maxStops" :options="maxStopsOptions" />
+            </b-col>
+          </b-row>
 
-        <b-row class="align-items-center mt-5 mb-1">
-          <b-col>
-            <label for="maxStops" class="mb-0">Max Time</label>
-          </b-col>
-          <b-col>
-            <span class="float-right">{{ maxTime }} hours</span>
-          </b-col>
-        </b-row>
-        <b-row>
-          <b-col>
-            <vue-slider tooltip="false" v-model="maxTime" :min="minMaxTime" :max="maxMaxTime"></vue-slider>
-          </b-col>
-        </b-row>
+          <b-row class="align-items-center mt-5 mb-1">
+            <b-col>
+              <label for="maxStops" class="mb-0">Max Time</label>
+            </b-col>
+            <b-col>
+              <span class="float-right">{{ maxTime }} hours</span>
+            </b-col>
+          </b-row>
+          <b-row>
+            <b-col>
+              <vue-slider tooltip="false" v-model="maxTime" :min="minMaxTime" :max="maxMaxTime"></vue-slider>
+            </b-col>
+          </b-row>
 
-        <b-row class="align-items-center mt-5">
-          <b-col>
-            <label for="maxPrice" class="mb-0">Max Price</label>
-          </b-col>
-          <b-col>
-          </b-col>
-        </b-row>
-        <b-row class="mt-5">
-          <b-col>
-            <vue-slider v-model="priceRange.value"
-                        :min="priceRange.min"
-                        :max="priceRange.max"
-                        formatter="£{value}"
-                        id="maxPrice"></vue-slider>
-          </b-col>
-        </b-row>
+          <b-row class="align-items-center mt-5">
+            <b-col>
+              <label for="maxPrice" class="mb-0">Max Price</label>
+            </b-col>
+            <b-col>
+            </b-col>
+          </b-row>
+          <b-row class="mt-5">
+            <b-col>
+              <vue-slider v-model="priceRange.value"
+                          :min="priceRange.min"
+                          :max="priceRange.max"
+                          formatter="£{value}"
+                          id="maxPrice"></vue-slider>
+            </b-col>
+          </b-row>
 
-        <b-row class="mt-5 mb-2">
-          <b-col>Airlines</b-col>
-        </b-row>
-        <b-row>
-          <b-col>
-            <b-form-checkbox-group stacked :checked="airlineVals" v-model="selectedAirlines" name="airlines" :options="airlines">
-            </b-form-checkbox-group>
-          </b-col>
-        </b-row>
-      </b-card>
-    </b-col>
-    <b-col>
-      <v-data-iterator
-        :items="filteredFlights">
-        <div slot="item" slot-scope="props">
-        <flight-card class="my-4" :flight="props.item"></flight-card>
+          <b-row class="mt-5 mb-2">
+            <b-col>Airlines</b-col>
+          </b-row>
+          <b-row>
+            <b-col>
+              <b-form-checkbox-group stacked :checked="airlineVals" v-model="selectedAirlines" name="airlines" :options="airlines">
+              </b-form-checkbox-group>
+            </b-col>
+          </b-row>
+        </b-card>
+      </b-col>
+      <b-col>
+        <v-data-iterator
+          :items="filteredFlights">
+          <div slot="item" slot-scope="props">
+          <flight-card class="my-4" :flight="props.item"></flight-card>
 
-        </div>
-      </v-data-iterator>
-    </b-col>
-  </b-row>
+          </div>
+        </v-data-iterator>
+      </b-col>
+    </b-row>
+  </b-container>
 </template>
 
 <script>
 import moment from 'moment'
+import _ from 'lodash'
 import FlightCard from '@/components/FlightCard'
 import vueSlider from 'vue-slider-component'
 import flighpaths from '@/misc/flights.json'
@@ -91,7 +98,15 @@ export default {
       airlines: [
       ],
       selectedAirlines: [],
-      flights: []
+      flights: [],
+      sortOption: null,
+      sortOptions: [
+        { value: 'null', text: '---- Sort By ----' },
+        { value: ['price', 'asc'], text: 'Lowest Price First' },
+        { value: ['price', 'desc'], text: 'Highest Price First' },
+        { value: [(item) => ((item.outbound.duration + (item.return || { duration: 0 }).duration) / 2), 'asc'], text: 'Quickest Flight' },
+        { value: [(item) => (item.outbound.stops.length + (item.return || { stops: [] }).stops.length), 'asc'], text: 'Fewest Stops' }
+      ]
     }
   },
   components: {
@@ -102,8 +117,14 @@ export default {
     airlineVals: function () {
       return this.airlines.map(x => x.value)
     },
+    sortedList: function () {
+      if (this.sortOption === null)
+        return this.flights
+      else
+        return _.orderBy(this.flights, this.sortOption[0], this.sortOption[1])
+    },
     filteredFlights: function () {
-      return this.flights.filter((item) => {
+      return this.sortedList.filter((item) => {
         let dirs = ['outbound', 'return']
         for (const x in ['outbound', 'return']) {
           let flight = item[dirs[x]] || null
@@ -170,7 +191,7 @@ export default {
     this.flights = this.genFlights()
 
     this.airlines = [...(new Set([...(this.flights.map(x => x.outbound.airline)),
-                                  ...(this.flights.map(x => x.return.airline))]))]
+      ...(this.flights.map(x => x.return.airline))]))]
     this.selectedAirlines = this.airlines
   }
 }
