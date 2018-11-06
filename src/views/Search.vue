@@ -74,7 +74,7 @@
         <v-data-iterator
           :items="filteredFlights">
           <div slot="item" slot-scope="props">
-          <flight-card class="my-4" :flight="props.item"></flight-card>
+          <flight-card class="my-4" :flight="props.item" :index="props.index"></flight-card>
 
           </div>
         </v-data-iterator>

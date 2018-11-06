@@ -40,16 +40,20 @@
       </b-col>
       <b-col cols="2" class="d-flex align-items-end flex-column">
         <h2 class="mb-auto">£{{ flight.price }}</h2>
-        <b-button class="mt-3">Book Now!</b-button>
+        <!-- <b-button class="mt-3">Book Now!</b-button> -->
+        <flight-details-modal :flightID="index" :flight="flight" class="mt-3"></flight-details-modal>
       </b-col>
     </b-row>
   </b-card>
 </template>
 
 <script>
+import FlightDetailsModal from '@/components/FlightDetailsModal'
+
 export default {
   props: {
-    flight: Object
+    flight: Object,
+    index: Number
   },
   filters: {
     nearestQuarter: function (value) {
@@ -60,6 +64,9 @@ export default {
     withReturn: function () {
       return typeof this.flight.return !== 'undefined'
     }
+  },
+  components: {
+    FlightDetailsModal
   }
 }
 </script>

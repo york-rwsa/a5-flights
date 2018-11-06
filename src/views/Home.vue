@@ -82,19 +82,25 @@ export default {
       children: 0,
       from: '',
       to: '',
-      classSelection: 'economy',
+      classSelection: 'Economy',
       classOptions: [
-        { value: 'economy', text: 'Economy' },
-        { value: 'premium', text: 'Premium' },
-        { value: 'business', text: 'Business' },
-        { value: 'firstclass', text: 'First Class' }
+        { value: 'Economy', text: 'Economy' },
+        { value: 'Premium', text: 'Premium' },
+        { value: 'Business', text: 'Business' },
+        { value: 'First Class', text: 'First Class' }
       ]
     }
   },
   methods: {
     searchNow: function (evt) {
       evt.preventDefault()
-      this.$store.commit('updateSearch', { from: this.from, to: this.to, outboundDate: this.outboundDate, returnDate: this.returnDate })
+      this.$store.commit('updateSearch', { 
+        from: this.from,
+        to: this.to,
+        outboundDate: this.outboundDate,
+        returnDate: this.returnDate,
+        flightClass: this.classSelection
+      })
       this.$router.push('/search')
     },
     addReturnDate: function () {
@@ -108,6 +114,7 @@ export default {
       this.to = this.$store.state.flightSearch.to
       this.outboundDate = this.$store.state.flightSearch.outboundDate
       this.returnDate = this.$store.state.flightSearch.returnDate
+      this.classSelection = this.$store.state.flightSearch.flightClass
     }
   }
 }
