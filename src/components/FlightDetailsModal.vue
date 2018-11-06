@@ -54,7 +54,8 @@ export default {
   },
   methods: {
     bookNow () {
-      this.$refs[this.modalID].hide()
+      // this.$refs[this.modalID].hide()
+      this.$router.push('bookflight')
     }
   }
 }

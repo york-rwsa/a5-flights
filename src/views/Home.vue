@@ -94,7 +94,7 @@ export default {
   methods: {
     searchNow: function (evt) {
       evt.preventDefault()
-      this.$store.commit('updateSearch', { 
+      this.$store.commit('updateSearch', {
         from: this.from,
         to: this.to,
         outboundDate: this.outboundDate,
