@@ -1,9 +1,9 @@
 <template>
   <b-card>
     <b-row>
-      <b-col>
+      <b-col cols="12" md="10">
         <b-row class="align-items-center">
-          <b-col cols="3">
+          <b-col cols="12" md="3" class="mb-2 mb-md-0">
             <span class="align-middle"><b>OUTBOUND</b></span>
           </b-col>
           <b-col>
@@ -21,7 +21,7 @@
         </b-row>
         <hr v-if="withReturn" />
         <b-row class="align-items-center" v-if="withReturn">
-          <b-col cols="3">
+          <b-col cols="12" md="3" class="mb-2 mb-md-0">
             <span class="align-middle"><b>RETURN</b></span>
           </b-col>
           <b-col>
@@ -38,9 +38,8 @@
           </b-col>
         </b-row>
       </b-col>
-      <b-col cols="2" class="d-flex align-items-end flex-column">
+      <b-col cols="12" md="2" class="d-flex align-items-end flex-column">
         <h2 class="mb-auto">£{{ flight.price }}</h2>
-        <!-- <b-button class="mt-3">Book Now!</b-button> -->
         <flight-details-modal :flightID="index" :flight="flight" class="mt-3"></flight-details-modal>
       </b-col>
     </b-row>

@@ -34,7 +34,7 @@
                   <b-form-select v-model="maxStops" :options="maxStopsOptions" />
                 </b-col>
               </b-row>
-    
+
               <b-row class="align-items-center mt-5 mb-1">
                 <b-col>
                   <label for="maxStops" class="mb-0">Max Time</label>
@@ -48,7 +48,7 @@
                   <vue-slider tooltip="false" v-model="maxTime" :min="minMaxTime" :max="maxMaxTime"></vue-slider>
                 </b-col>
               </b-row>
-    
+
               <b-row class="align-items-center mt-5">
                 <b-col>
                   <label for="maxPrice" class="mb-0">Max Price</label>
@@ -65,7 +65,7 @@
                               id="maxPrice"></vue-slider>
                 </b-col>
               </b-row>
-    
+
               <b-row class="mt-5 mb-2">
                 <b-col>Airlines</b-col>
               </b-row>
@@ -137,7 +137,7 @@ export default {
   },
   computed: {
     filterCollapsed: function () {
-      if (typeof this.$refs.filterCollapse !== "undefined"){
+      if (typeof this.$refs.filterCollapse !== 'undefined') {
         return this.$refs.filterCollapse.show
       } else {
         return true
