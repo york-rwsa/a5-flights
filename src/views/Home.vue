@@ -9,13 +9,13 @@
                 <b-col cols="12" md="6">
                   <b-row class="align-items-center">
                     <b-col><label for="from">From</label></b-col>
-                    <b-col cols="9"><b-form-input v-model="from" id="from" type="text" required placeholder="Enter an airport or city"></b-form-input></b-col>
+                    <b-col cols="9"><b-form-input tabindex="1" v-model="from" id="from" type="text" required placeholder="Enter an airport or city"></b-form-input></b-col>
                   </b-row>
                 </b-col>
                 <b-col cols="12" md="6" class="mt-1 mt-md-0">
                   <b-row class="align-items-center">
                     <b-col class="pr-0"><label for="from">Outbound Date</label></b-col>
-                    <b-col cols="7"><b-form-input type="date" v-model="outboundDate"></b-form-input></b-col>
+                    <b-col cols="7"><b-form-input type="date" tabindex="3" v-model="outboundDate"></b-form-input></b-col>
                   </b-row>
                 </b-col>
               </b-row>
@@ -23,17 +23,17 @@
                 <b-col cols="12" md="6">
                   <b-row class="align-items-center">
                     <b-col><label for="from">To</label></b-col>
-                    <b-col cols="9"><b-form-input v-model="to" id="from" type="text" required placeholder="Enter an airport or city"></b-form-input></b-col>
+                    <b-col cols="9"><b-form-input tabindex="2" v-model="to" id="from" type="text" required placeholder="Enter an airport or city"></b-form-input></b-col>
                   </b-row>
                 </b-col>
                 <b-col cols="12" md="6" class="mt-1 mt-md-0">
                   <b-row v-if="addReturn" class="align-items-center">
                     <b-col><label for="from">Return Date</label></b-col>
-                    <b-col cols="7"><b-form-input type="date" v-model="returnDate"></b-form-input></b-col>
+                    <b-col cols="7"><b-form-input tabindex="4" type="date" v-model="returnDate"></b-form-input></b-col>
                   </b-row>
                   <b-row v-if="!addReturn" class="align-items-center">
                     <b-col offset="4">
-                      <b-button @click="addReturnDate">Add Return</b-button>
+                      <b-button @click="addReturnDate" tabindex="4">Add Return</b-button>
                     </b-col>
                   </b-row>
                 </b-col>
@@ -41,20 +41,20 @@
               <b-row class="my-4">
                 <b-col cols="6" md="4">
                   <b-input-group prepend="Adults: ">
-                    <b-form-input type="number" pattern="\d*" min="0" v-model="adults"></b-form-input>
+                    <b-form-input type="number" pattern="\d*" min="0" v-model="adults" tabindex="5"></b-form-input>
                   </b-input-group>
                 </b-col>
                 <b-col cols="6" md="4" class="pl-0 pl-md-3 pr-md-3">
                   <b-input-group prepend="Children: ">
-                    <b-form-input type="number" pattern="\d*" min="0" v-model="children"></b-form-input>
+                    <b-form-input type="number" pattern="\d*" min="0" v-model="children" tabindex="6"></b-form-input>
                   </b-input-group>
                 </b-col>
                 <b-col xs="12" md="4" class="mt-1 mt-md-0">
-                  <b-form-select v-model="classSelection" :options="classOptions"></b-form-select>
+                  <b-form-select v-model="classSelection" :options="classOptions" tabindex="7"></b-form-select>
                 </b-col>
               </b-row>
               <b-row>
-                <b-col><b-button type="submit" variant="primary" class="float-right">Search Now!</b-button></b-col>
+                <b-col><b-button type="submit" variant="primary" class="float-right" tabindex="8">Search Now!</b-button></b-col>
               </b-row>
             </b-form>
           </b-tab>
