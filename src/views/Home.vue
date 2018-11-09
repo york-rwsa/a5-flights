@@ -28,7 +28,18 @@
                 </b-col>
                 <b-col cols="12" md="6" class="mt-1 mt-md-0">
                   <b-row v-if="addReturn" class="align-items-center">
-                    <b-col><label for="from">Return Date</label></b-col>
+                    <b-col>
+                      <b-row>
+                        <b-col class="pr-0 pl-md-3 pr-md-3">
+                          <label for="from">Return Date</label>
+                        </b-col>
+                        <b-col cols="1" class="pl-0 pl-md-3 pr-md-6">
+                          <b-btn size="sm" variant="link" @click="addReturn=false">
+                            <v-icon small>close</v-icon>
+                          </b-btn>
+                        </b-col>
+                      </b-row>  
+                    </b-col>
                     <b-col cols="7"><b-form-input tabindex="4" type="date" v-model="returnDate"></b-form-input></b-col>
                   </b-row>
                   <b-row v-if="!addReturn" class="align-items-center">
@@ -120,6 +131,6 @@ export default {
 
 <style>
 label {
-  margin-bottom: 0;
+  margin-bottom: 0 !important;
 }
 </style>
