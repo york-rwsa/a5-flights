@@ -44,7 +44,7 @@
                     <b-form-input type="number" pattern="\d*" min="0" v-model="adults"></b-form-input>
                   </b-input-group>
                 </b-col>
-                <b-col cols="6" md="4">
+                <b-col cols="6" md="4" class="pl-0 pl-md-3 pr-md-3">
                   <b-input-group prepend="Children: ">
                     <b-form-input type="number" pattern="\d*" min="0" v-model="children"></b-form-input>
                   </b-input-group>
