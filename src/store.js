@@ -9,7 +9,7 @@ export default new Vuex.Store({
       from: '',
       to: '',
       outboundDate: '',
-      returnDate: null,
+      returnDate: '',
       flightClass: ''
     }
   },
