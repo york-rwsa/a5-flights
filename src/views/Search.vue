@@ -45,7 +45,7 @@
               </b-row>
               <b-row>
                 <b-col>
-                  <vue-slider dotSize="25" tooltip="false" v-model="maxTime" :min="minMaxTime" :max="maxMaxTime"></vue-slider>
+                  <vue-slider :dotSize=25 tooltip="false" v-model="maxTime" :min="minMaxTime" :max="maxMaxTime"></vue-slider>
                 </b-col>
               </b-row>
 
@@ -60,7 +60,7 @@
                 <b-col>
                   <vue-slider v-model="priceRange.value"
                               :min="priceRange.min"
-                              dotSize="25"
+                              :dotSize=25
                               :max="priceRange.max"
                               formatter="£{value}"
                               id="maxPrice"></vue-slider>
@@ -97,7 +97,7 @@
 import moment from 'moment'
 import _ from 'lodash'
 import FlightCard from '@/components/FlightCard'
-import vueSlider from 'vue-slider-component'
+import VueSlider from 'vue-slider-component'
 import flighpaths from '@/misc/flights.json'
 
 export default {
@@ -134,7 +134,7 @@ export default {
   },
   components: {
     FlightCard,
-    vueSlider
+    VueSlider
   },
   computed: {
     filterCollapsed: function () {
