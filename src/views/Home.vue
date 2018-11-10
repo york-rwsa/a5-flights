@@ -5,11 +5,20 @@
         <b-tabs card>
           <b-tab title="Flights" active>
             <b-form @submit="searchNow">
-              <b-row class="mb-4">
+              <b-row class="mb-4 align-items-center">
                 <b-col cols="12" md="6">
                   <b-row class="align-items-center">
                     <b-col><label for="from">From</label></b-col>
-                    <b-col cols="9"><b-form-input tabindex="1" v-model="from" id="from" type="text" required placeholder="Enter an airport or city"></b-form-input></b-col>
+                    <b-col cols="9">
+                      <!-- <b-form-input tabindex="1" v-model="from" id="from" type="text" required placeholder="Enter an airport or city"></b-form-input> -->
+                      <v-autocomplete
+                        placeholder="Search for a airport"
+                        required
+                        v-model="from"
+                        :items="airports"
+                        tabindex="1"
+                      ></v-autocomplete>
+                    </b-col>
                   </b-row>
                 </b-col>
                 <b-col cols="12" md="6" class="mt-1 mt-md-0">
@@ -19,11 +28,20 @@
                   </b-row>
                 </b-col>
               </b-row>
-              <b-row class="my-4">
+              <b-row class="my-4 align-items-center">
                 <b-col cols="12" md="6">
                   <b-row class="align-items-center">
                     <b-col><label for="from">To</label></b-col>
-                    <b-col cols="9"><b-form-input tabindex="2" v-model="to" id="from" type="text" required placeholder="Enter an airport or city"></b-form-input></b-col>
+                    <b-col cols="9">
+                      <!-- <b-form-input tabindex="2" v-model="to" id="from" type="text" required placeholder="Enter an airport or city"></b-form-input> -->
+                      <v-autocomplete
+                        placeholder="Search for a airport"
+                        required
+                        v-model="to"
+                        :items="airports"
+                        tabindex="1"
+                      ></v-autocomplete>
+                    </b-col>
                   </b-row>
                 </b-col>
                 <b-col cols="12" md="6" class="mt-1 mt-md-0">
@@ -38,7 +56,7 @@
                             <v-icon small>close</v-icon>
                           </b-btn>
                         </b-col>
-                      </b-row>  
+                      </b-row>
                     </b-col>
                     <b-col cols="7"><b-form-input tabindex="4" type="date" v-model="returnDate"></b-form-input></b-col>
                   </b-row>
@@ -80,6 +98,7 @@
 
 <script>
 import moment from 'moment'
+import airportJsonData from '@/misc/airports_list.json'
 
 export default {
   data () {
@@ -97,7 +116,8 @@ export default {
         { value: 'Premium', text: 'Premium' },
         { value: 'Business', text: 'Business' },
         { value: 'First Class', text: 'First Class' }
-      ]
+      ],
+      airports: airportJsonData.data
     }
   },
   methods: {

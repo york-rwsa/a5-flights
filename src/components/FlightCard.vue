@@ -15,7 +15,7 @@
             <b-row>
               <b-col><p>{{ flight.outbound.airline }}</p></b-col>
               <b-col><p>{{ flight.outbound.stops.join(", ") }}</p></b-col>
-              <b-col><p>{{ flight.outbound.from }} - {{ flight.outbound.to }}</p></b-col>
+              <b-col><p>{{ flight.outbound.from | airportCode }} - {{ flight.outbound.to | airportCode }}</p></b-col>
             </b-row>
           </b-col>
         </b-row>
@@ -33,7 +33,7 @@
             <b-row>
               <b-col><p>{{ flight.return.airline }}</p></b-col>
               <b-col><p>{{ flight.return.stops.join(", ") }}</p></b-col>
-              <b-col><p>{{ flight.return.from }} - {{ flight.return.to }}</p></b-col>
+              <b-col><p>{{ flight.return.from | airportCode }} - {{ flight.return.to | airportCode }}</p></b-col>
             </b-row>
           </b-col>
         </b-row>
@@ -48,8 +48,10 @@
 
 <script>
 import FlightDetailsModal from '@/components/FlightDetailsModal'
+import { airportCode } from '@/components/mixins/airportCode.js'
 
 export default {
+  mixins: [airportCode],
   props: {
     flight: Object,
     index: Number
