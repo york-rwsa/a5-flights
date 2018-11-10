@@ -12,7 +12,7 @@
                     <b-col cols="9">
                       <!-- <b-form-input tabindex="1" v-model="from" id="from" type="text" required placeholder="Enter an airport or city"></b-form-input> -->
                       <v-autocomplete
-                        placeholder="Search for a airport"
+                        placeholder="Search for an airport"
                         required
                         v-model="from"
                         :items="airports"
@@ -35,7 +35,7 @@
                     <b-col cols="9">
                       <!-- <b-form-input tabindex="2" v-model="to" id="from" type="text" required placeholder="Enter an airport or city"></b-form-input> -->
                       <v-autocomplete
-                        placeholder="Search for a airport"
+                        placeholder="Search for an airport"
                         required
                         v-model="to"
                         :items="airports"
