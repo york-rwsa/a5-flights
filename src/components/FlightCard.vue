@@ -1,5 +1,8 @@
 <template>
   <b-card>
+    <div v-if="flight.deal" class="ribbon">
+      <span>Mega Deal</span>
+    </div>
     <b-row>
       <b-col cols="12" md="10">
         <b-row class="align-items-center">
@@ -75,5 +78,48 @@ export default {
 <style>
 .d-flex > button {
   flex: 0 0 auto !important;
+}
+
+.ribbon {
+   position: absolute;
+   left: -5px; top: -5px;
+   z-index: 1;
+   overflow: hidden;
+   width: 75px; height: 75px;
+   text-align: left;
+}
+.ribbon span {
+   font-size: 10px;
+   color: #fff;
+   text-transform: uppercase;
+   text-align: center;
+   font-weight: bold; line-height: 20px;
+   transform: rotate(-45deg);
+   width: 100px; display: block;
+   background: #79A70A;
+   background: linear-gradient(#F70505 0%, #8F0808 100%);
+   box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+   position: absolute;
+   top: 19px; left: -21px;
+}
+.ribbon span::before {
+   content: '';
+   position: absolute;
+   left: 0px; top: 100%;
+   z-index: -1;
+   border-left: 3px solid #8F0808;
+   border-right: 3px solid transparent;
+   border-bottom: 3px solid transparent;
+   border-top: 3px solid #8F0808;
+}
+.ribbon span::after {
+   content: '';
+   position: absolute;
+   right: 0%; top: 100%;
+   z-index: -1;
+   border-right: 3px solid #8F0808;
+   border-left: 3px solid transparent;
+   border-bottom: 3px solid transparent;
+   border-top: 3px solid #8F0808;
 }
 </style>

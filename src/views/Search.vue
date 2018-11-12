@@ -150,9 +150,25 @@ export default {
     airlineVals: function () {
       return this.airlines.map(x => x.value)
     },
+    lowerPriceAvg: function () {
+      let prices = this.flights.map((obj) => obj.price)
+      prices.sort()
+      return prices[Math.floor(prices.length * 0.4) - 1]
+    },
+    withDeals: function () {
+      return this.flights.map((obj) => {
+        if (obj.price <= this.lowerPriceAvg) {
+          obj.deal = Math.random() <= 0.75
+        } else {
+          obj.deal = false
+        }
+
+        return obj
+      })
+    },
     sortedList: function () {
       if (this.sortOption === null) {
-        return this.flights
+        return this.withDeals
       } else {
         return _.orderBy(this.flights, this.sortOption[0], this.sortOption[1])
       }
