@@ -96,8 +96,8 @@ export default {
    font-weight: bold; line-height: 20px;
    transform: rotate(-45deg);
    width: 100px; display: block;
-   background: #79A70A;
-   background: linear-gradient(#F70505 0%, #8F0808 100%);
+   background: #007bff;
+   background: linear-gradient(#3f94f0 0%, #007bff 100%);
    box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
    position: absolute;
    top: 19px; left: -21px;
@@ -107,19 +107,19 @@ export default {
    position: absolute;
    left: 0px; top: 100%;
    z-index: -1;
-   border-left: 3px solid #8F0808;
+   border-left: 3px solid #007bff;
    border-right: 3px solid transparent;
    border-bottom: 3px solid transparent;
-   border-top: 3px solid #8F0808;
+   border-top: 3px solid #007bff;
 }
 .ribbon span::after {
    content: '';
    position: absolute;
    right: 0%; top: 100%;
    z-index: -1;
-   border-right: 3px solid #8F0808;
+   border-right: 3px solid #007bff;
    border-left: 3px solid transparent;
    border-bottom: 3px solid transparent;
-   border-top: 3px solid #8F0808;
+   border-top: 3px solid #007bff;
 }
 </style>
