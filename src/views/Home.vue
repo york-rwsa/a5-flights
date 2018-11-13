@@ -15,7 +15,7 @@
       </b-col>
     </b-row>
     <b-row class="mt-5">
-      <b-col v-for="(deal, index) in deals" :key="index" cols="3">
+      <b-col v-for="(deal, index) in deals" :key="index" cols="12" md="3" class="mt-4 mt-md-0">
         <deal-card :deal="deal"></deal-card>
       </b-col>
     </b-row>
