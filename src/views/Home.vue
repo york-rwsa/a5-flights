@@ -46,7 +46,7 @@ export default {
           img: require('@/assets/ireland.jpg')
         },
         {
-          title: '£400 pp for a week in Majorca',
+          title: '£400 pp for a week in Thailand',
           text: 'Tour the amazing beaches of Thailand. Get to know the beautiful culture.',
           img: require('@/assets/thailand.jpg')
         }
