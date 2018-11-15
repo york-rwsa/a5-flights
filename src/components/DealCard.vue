@@ -16,22 +16,9 @@ export default {
   props: ['deal'],
   methods: {
     book () {
-      this.loading.text = 'Taking you to package booking site'
-      setTimeout(() => {
-        this.loading.close()
-      }, 4000)
+      this.$store.commit('updateBookingMessage', { message: 'Redirecting to package booking site' })
+      this.$router.push('bookflight')
     }
-  },
-  computed: {
-    loading () {
-      return this.$loading({
-        lock: true,
-        background: 'rgba(0, 0, 0, 0.7)'
-      })
-    }
-  },
-  destroyed () {
-    this.loading.close()
   }
 }
 </script>
