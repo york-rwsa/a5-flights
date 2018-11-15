@@ -1,3 +1,4 @@
+
 <script>
 export default {
   computed: {
@@ -6,17 +7,10 @@ export default {
         lock: true,
         background: 'rgba(0, 0, 0, 0.7)'
       })
-    },
-    message () {
-      return this.$store.getters.bookingMessage
     }
   },
   mounted () {
-    if (this.message === '') {
-      this.loading.text = 'Redirecting to airline\'s booking site'
-    } else {
-      this.loading.text = this.message
-    }
+    this.loading.text = 'Redirecting to airline\'s booking site'
   },
   destroyed () {
     this.loading.close()

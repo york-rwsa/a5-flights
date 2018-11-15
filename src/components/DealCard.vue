@@ -6,20 +6,14 @@
       {{ deal.text }}
     </p>
     <div slot="footer">
-      <b-button class="float-right" @click="book" primary>More Detials</b-button>
-    </div>    
+      <b-button class="float-right" to="bookpackage" primary>More Detials</b-button>
+    </div>
   </b-card>
 </template>
 
 <script>
 export default {
-  props: ['deal'],
-  methods: {
-    book () {
-      this.$store.commit('updateBookingMessage', { message: 'Redirecting to package booking site' })
-      this.$router.push('bookflight')
-    }
-  }
+  props: ['deal']
 }
 </script>
 

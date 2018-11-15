@@ -19,7 +19,7 @@ export default new Router({
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/Search.vue')
+      component: () => import(/* webpackChunkName: "search" */ './views/Search.vue')
     },
     {
       path: '/bookflight',
@@ -27,7 +27,15 @@ export default new Router({
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/BookFlight.vue')
+      component: () => import(/* webpackChunkName: "bookflight" */ './views/BookFlight.vue')
+    },
+    {
+      path: '/bookpackage',
+      name: 'bookpackage',
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import(/* webpackChunkName: "bookpackage" */ './views/BookPackage.vue')
     }
   ]
 })
