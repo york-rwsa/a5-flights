@@ -8,11 +8,11 @@
         </b-row>
         <b-row>
           <b-col>
-            <p>Depart from {{ flight.outbound.from }} at {{ flight.outbound.departureTime }} on {{ flight.outbound.departureDate }}</p>
+            <p>Depart from {{ flight.outbound.from }} at {{ flight.outbound.departureTime }} on {{ flight.outbound.departureDate | normDate }}</p>
             <p>Flying {{ search.flightClass }} on {{ flight.outbound.airline }}</p>
           </b-col>
           <b-col>
-            <p>Arrive at {{ flight.outbound.to }} at {{ flight.outbound.arrivalTime }} on {{ flight.outbound.arrivalDate }}</p>
+            <p>Arrive at {{ flight.outbound.to }} at {{ flight.outbound.arrivalTime }} on {{ flight.outbound.arrivalDate | normDate }}</p>
           </b-col>
         </b-row>
         <div v-if="withReturn">
@@ -22,11 +22,11 @@
           </b-row>
           <b-row>
             <b-col>
-              <p>Depart from {{ flight.return.from }} at {{ flight.return.departureTime }} on {{ flight.return.departureDate }}</p>
+              <p>Depart from {{ flight.return.from }} at {{ flight.return.departureTime }} on {{ flight.return.departureDate | normDate }}</p>
               <p>Flying {{ search.flightClass }} on {{ flight.return.airline }}</p>
             </b-col>
             <b-col>
-              <p>Arrive at {{ flight.return.to }} at {{ flight.return.arrivalTime }} on {{ flight.return.arrivalDate }}</p>
+              <p>Arrive at {{ flight.return.to }} at {{ flight.return.arrivalTime }} on {{ flight.return.arrivalDate | normDate }}</p>
             </b-col>
           </b-row>
         </div>

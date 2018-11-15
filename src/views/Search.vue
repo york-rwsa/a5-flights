@@ -7,8 +7,8 @@
             <b-col>
               <b>{{ search.from }}</b>
               to <b>{{ search.to }}</b>
-              on {{ search.outboundDate }}
-              <span v-if="withReturn">, returning on {{ search.returnDate }}</span>
+              on {{ search.outboundDate | normDate }}
+              <span v-if="withReturn">, returning on {{ search.returnDate | normDate }}</span>
             </b-col>
           </b-row>
         </b-card>
