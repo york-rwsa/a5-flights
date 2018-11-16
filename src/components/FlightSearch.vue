@@ -117,7 +117,7 @@ export default {
         returnDate: this.returnDate,
         flightClass: this.classSelection
       })
-      this.$router.push('/search')
+      this.$router.push('/flightresults')
     },
     addReturnDate: function () {
       this.addReturn = true
