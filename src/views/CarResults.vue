@@ -10,7 +10,7 @@
           </b-row>
         </b-card>
       </b-col>
-      <!-- <b-col cols="12" md="2" class="mt-2 mt-md-0"><b-form-select v-model="sortOption" :options="sortOptions"></b-form-select></b-col> -->
+      <b-col cols="12" md="3" class="mt-2 mt-md-0"><b-form-select v-model="sortOption" :options="sortOptions"></b-form-select></b-col>
     </b-row>
     <b-row>
       <b-col cols="12" md="3" class="mt-4">
@@ -23,15 +23,56 @@
           </div>
           <b-collapse id="filterCollapse" ref="filterCollapse" class="dont-collapse-sm">
             <b-card-body>
-
+              <b-row class="align-items-center">
+                <b-col>
+                  <label for="maxPrice" class="mb-0">Price</label>
+                </b-col>
+                <b-col>
+                </b-col>
+              </b-row>
+              <b-row class="mt-5">
+                <b-col>
+                  <vue-slider v-model="filters.priceRange"
+                              :min="0 * days"
+                              :dotSize=25
+                              :max="100 * days"
+                              formatter="£{value}"
+                              id="maxPrice"></vue-slider>
+                </b-col>
+              </b-row>
+              <b-row class="align-items-center">
+                <b-col>
+                  <label for="seats" class="mb-0">Seats</label>
+                </b-col>
+                <b-col>
+                </b-col>
+              </b-row>
+              <b-row class="mt-5">
+                <b-col>
+                  <vue-slider v-model="filters.seats"
+                              :min="0"
+                              :dotSize=25
+                              :max="7"
+                              id="seats"></vue-slider>
+                </b-col>
+              </b-row>
+              <b-row class="mt-5 mb-2">
+                <b-col>Car Class</b-col>
+              </b-row>
+              <b-row>
+                <b-col>
+                  <b-form-checkbox-group stacked v-model="filters.selectedClasses" name="airlines" :options="filters.classes">
+                  </b-form-checkbox-group>
+                </b-col>
+              </b-row>
             </b-card-body>
           </b-collapse>
         </b-card>
       </b-col>
       <b-col>
-        <v-data-iterator :items="carWithTransmission">
+        <v-data-iterator :items="filteredCars">
           <div slot="item" slot-scope="props">
-            <car-card class="my-4" :car="props.item" :index="props.index"></car-card>
+            <car-card class="my-4" :car="props.item" :index="props.index" :days="2"></car-card>
           </div>
         </v-data-iterator>
       </b-col>
@@ -41,33 +82,85 @@
 
 <script>
 import CarCard from '@/components/CarCard'
+import VueSlider from 'vue-slider-component'
+
+import _ from 'lodash'
 
 export default {
   data () {
     return {
       cars: [
-        { seats: 2, class: 'Luxury', car: 'Jaguar', image: require('@/assets/cars/Jaguar.png') },
-        { seats: 3, class: 'Van', car: 'Mercedes Sprinter', image: require('@/assets/cars/Mercedes_Sprinter.png') },
-        { seats: 5, class: 'Luxury 4x4', car: 'Range Rover', image: require('@/assets/cars/Range_Rover.png') },
-        { seats: 4, class: 'Small Mini', car: 'Toyota Aygo', image: require('@/assets/cars/Toyota_Aygo.png') },
-        { seats: 5, class: 'Economy', car: 'Vauxhall Corsa', image: require('@/assets/cars/Vauxhall_Corsa.png') },
-        { seats: 5, class: 'Business', car: 'Vauxhall Insignia', image: require('@/assets/cars/Vauxhall_Insignia.png') },
-        { seats: 7, class: 'Large MPV', car: 'Vauxhall Zafira', image: require('@/assets/cars/Vauxhall_Zafira.png') }
-      ]
+        { seats: 2, class: 'Luxury', car: 'Jaguar', image: require('@/assets/cars/Jaguar.png'), priceMul: 2 },
+        { seats: 3, class: 'Van', car: 'Mercedes Sprinter', image: require('@/assets/cars/Mercedes_Sprinter.png'), priceMul: 2 },
+        { seats: 5, class: 'Luxury 4x4', car: 'Range Rover', image: require('@/assets/cars/Range_Rover.png'), priceMul: 2.5 },
+        { seats: 4, class: 'Small Mini', car: 'Toyota Aygo', image: require('@/assets/cars/Toyota_Aygo.png'), priceMul: 0.85 },
+        { seats: 5, class: 'Economy', car: 'Vauxhall Corsa', image: require('@/assets/cars/Vauxhall_Corsa.png'), priceMul: 1 },
+        { seats: 5, class: 'Business', car: 'Vauxhall Insignia', image: require('@/assets/cars/Vauxhall_Insignia.png'), priceMul: 1.5 },
+        { seats: 7, class: 'Large MPV', car: 'Vauxhall Zafira', image: require('@/assets/cars/Vauxhall_Zafira.png'), priceMul: 1.5 }
+      ],
+      priceMin: 10,
+      priceMax: 40,
+      sortOption: null,
+      sortOptions: [
+        { value: 'null', text: '---- Sort By ----' },
+        { value: ['pricePerDay', 'asc'], text: 'Lowest Price First' },
+        { value: ['pricePerDay', 'desc'], text: 'Highest Price First' },
+        { value: ['seats', 'desc'], text: 'Most People' }
+      ],
+      filters: {
+        priceRange: [0, 100 * 2],
+        seats: [0, 7],
+        selectedClasses: [],
+        classes: []
+      },
+      days: 2
     }
   },
   computed: {
-    carWithTransmission () {
+    carWithTransmissionAndPrice () {
       return this.cars.map((car) => {
+        car.pricePerDay = (Math.random() * (this.priceMax - this.priceMin) + this.priceMin) * car.priceMul
+
         let newcar = []
         newcar.push({ ...car, transmission: 'automatic' })
+        newcar[0].pricePerDay = newcar[0].pricePerDay * 1.05
+
         newcar.push({ ...car, transmission: 'manual' })
         return newcar
       }).flat()
+    },
+    sortedCars () {
+      if (this.sortOption === null) {
+        return this.carWithTransmissionAndPrice
+      } else {
+        return _.orderBy(this.carWithTransmissionAndPrice, this.sortOption[0], this.sortOption[1])
+      }
+    },
+    filteredCars () {
+      return this.sortedCars.filter((item) => {
+        if (item.pricePerDay * this.days > this.filters.priceRange[1] || item.pricePerDay * this.days < this.filters.priceRange[0]) {
+          return false
+        }
+
+        if (item.seats > this.filters.seats[1] || item.seats < this.filters.seats[0]) {
+          return false
+        }
+
+        if (!this.filters.selectedClasses.includes(item.class)) {
+          return false
+        }
+
+        return true
+      })
     }
   },
   components: {
-    CarCard
+    CarCard,
+    VueSlider
+  },
+  mounted () {
+    this.filters.classes = [...(new Set(this.cars.map(o => o.class)))]
+    this.filters.selectedClasses = this.filters.classes
   }
 }
 </script>

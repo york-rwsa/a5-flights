@@ -34,7 +34,7 @@
           <b-col style="border-right: 1px solid #ccc;">
             <b-row>
               <b-col>
-                <span class="price">£45.88</span>
+                <span class="price">£{{ car.pricePerDay.toFixed(2) * days }}</span>
               </b-col>
             </b-row>
             <b-row>
@@ -46,7 +46,7 @@
           <b-col>
             <b-row>
               <b-col>
-                <span class="price">£45.88</span>
+                <span class="price">£{{ car.pricePerDay.toFixed(2) }}</span>
               </b-col>
             </b-row>
             <b-row>
@@ -72,7 +72,8 @@
 export default {
   props: {
     car: Object,
-    index: Number
+    index: Number,
+    days: Number
   }
 }
 </script>
