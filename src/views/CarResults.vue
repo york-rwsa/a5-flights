@@ -29,17 +29,36 @@
         </b-card>
       </b-col>
       <b-col>
-        <!-- <v-data-iterator :items="filteredFlights">
-
-        </v-data-iterator> -->
+        <v-data-iterator :items="cars">
+          <div slot="item" slot-scope="props">
+            <car-card class="my-4" :car="props.item" :index="props.index"></car-card>
+          </div>
+        </v-data-iterator>
       </b-col>
     </b-row>
   </b-container>
 </template>
 
 <script>
-export default {
+import CarCard from '@/components/CarCard'
 
+export default {
+  data () {
+    return {
+      cars: [
+        { seats: 2, class: 'Luxury', car: 'Jaguar', image: require('@/assets/cars/Jaguar.png') },
+        { seats: 3, class: 'Van', car: 'Mercedes Sprinter', image: require('@/assets/cars/Mercedes_Sprinter.png') },
+        { seats: 5, class: 'Luxury 4x4', car: 'Range Rover', image: require('@/assets/cars/Range_Rover.png') },
+        { seats: 4, class: 'Small Mini', car: 'Toyota Aygo', image: require('@/assets/cars/Toyota_Aygo.png') },
+        { seats: 5, class: 'Economy', car: 'Vauxhall Corsa', image: require('@/assets/cars/Vauxhall_Corsa.png') },
+        { seats: 5, class: 'Business', car: 'Vauxhall Insignia', image: require('@/assets/cars/Vauxhall_Insignia.png') },
+        { seats: 7, class: 'Large MPV', car: 'Vauxhall Zafira', image: require('@/assets/cars/Vauxhall_Zafira.png') }
+      ]
+    }
+  },
+  components: {
+    CarCard
+  }
 }
 </script>
 
