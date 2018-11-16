@@ -18,7 +18,7 @@
         <b-row class="mt-2 align-items-center">
           <b-col>
             <i class="icon-gear"></i>
-            <span>Manual</span>
+            <span>{{ car.transmission }}</span>
           </b-col>
           <b-col>
             <v-icon style="vertical-align: bottom;" class="mr-2">people_outline</v-icon>

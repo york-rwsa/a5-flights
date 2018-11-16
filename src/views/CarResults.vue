@@ -29,7 +29,7 @@
         </b-card>
       </b-col>
       <b-col>
-        <v-data-iterator :items="cars">
+        <v-data-iterator :items="carWithTransmission">
           <div slot="item" slot-scope="props">
             <car-card class="my-4" :car="props.item" :index="props.index"></car-card>
           </div>
@@ -54,6 +54,16 @@ export default {
         { seats: 5, class: 'Business', car: 'Vauxhall Insignia', image: require('@/assets/cars/Vauxhall_Insignia.png') },
         { seats: 7, class: 'Large MPV', car: 'Vauxhall Zafira', image: require('@/assets/cars/Vauxhall_Zafira.png') }
       ]
+    }
+  },
+  computed: {
+    carWithTransmission () {
+      return this.cars.map((car) => {
+        let newcar = []
+        newcar.push({ ...car, transmission: 'automatic' })
+        newcar.push({ ...car, transmission: 'manual' })
+        return newcar
+      }).flat()
     }
   },
   components: {
