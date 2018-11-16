@@ -75,14 +75,14 @@ export default {
   methods: {
     searchNow: function (evt) {
       evt.preventDefault()
-      this.$store.commit('updateFlightSearch', {
-        from: this.from,
-        to: this.to,
-        outboundDate: this.outboundDate,
-        returnDate: this.returnDate,
-        flightClass: this.classSelection
+      this.$store.commit('updateCarSearch', {
+        pickupDate: this.form.pickupDate,
+        dropoffDate: this.form.dropoffDate,
+        pickupLocation: this.form.pickupLocation,
+        driverOver25: this.form.driverOver25,
+        driversAge: this.form.driversAge
       })
-      this.$router.push('/flightresults')
+      this.$router.push('/carresults')
     }
   }
 }

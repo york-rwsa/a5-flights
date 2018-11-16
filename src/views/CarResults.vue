@@ -5,7 +5,8 @@
         <b-card>
           <b-row>
             <b-col>
-              deets bro
+                Pickup from {{ search.pickupLocation }} on {{ search.pickupDate }}.
+                Return on {{ search.dropoffDate }}
             </b-col>
           </b-row>
         </b-card>
@@ -72,7 +73,7 @@
       <b-col>
         <v-data-iterator :items="filteredCars">
           <div slot="item" slot-scope="props">
-            <car-card class="my-4" :car="props.item" :index="props.index" :days="2"></car-card>
+            <car-card class="my-4" :car="props.item" :index="props.index" :days="days"></car-card>
           </div>
         </v-data-iterator>
       </b-col>
@@ -84,6 +85,7 @@
 import CarCard from '@/components/CarCard'
 import VueSlider from 'vue-slider-component'
 
+import moment from 'moment'
 import _ from 'lodash'
 
 export default {
@@ -112,8 +114,7 @@ export default {
         seats: [0, 7],
         selectedClasses: [],
         classes: []
-      },
-      days: 2
+      }
     }
   },
   computed: {
@@ -152,6 +153,15 @@ export default {
 
         return true
       })
+    },
+    search () {
+      return this.$store.getters.carsearch
+    },
+    days () {
+      if (this.search.pickupDate === '') {
+        return 1
+      }
+      return moment(this.search.dropoffDate).diff(moment(this.search.pickupDate), 'days')
     }
   },
   components: {
@@ -161,6 +171,7 @@ export default {
   mounted () {
     this.filters.classes = [...(new Set(this.cars.map(o => o.class)))]
     this.filters.selectedClasses = this.filters.classes
+    this.filters.priceRange[1] = this.priceMax * 2.5 * this.days
   }
 }
 </script>

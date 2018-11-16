@@ -34,7 +34,7 @@
           <b-col style="border-right: 1px solid #ccc;">
             <b-row>
               <b-col>
-                <span class="price">£{{ car.pricePerDay.toFixed(2) * days }}</span>
+                <span class="price">£{{ (car.pricePerDay * days).toFixed(2) }}</span>
               </b-col>
             </b-row>
             <b-row>
