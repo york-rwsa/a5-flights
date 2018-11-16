@@ -7,6 +7,9 @@
             <b-tab title="Flights" active>
               <flight-search></flight-search>
             </b-tab>
+            <b-tab title="Car Rental">
+              <car-search></car-search>
+            </b-tab>
             <b-tab title="Hotels">
               not implemented
             </b-tab>
@@ -24,6 +27,7 @@
 
 <script>
 import FlightSearch from '@/components/FlightSearch'
+import CarSearch from '@/components/CarSearch'
 import DealCard from '@/components/DealCard'
 
 export default {
@@ -55,7 +59,8 @@ export default {
   },
   components: {
     FlightSearch,
-    DealCard
+    DealCard,
+    CarSearch
   }
 }
 </script>

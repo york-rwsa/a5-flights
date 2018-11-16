@@ -11,6 +11,14 @@ export default new Vuex.Store({
       outboundDate: '',
       returnDate: '',
       flightClass: ''
+    },
+    carSearch: {
+      driverOver25: true,
+      pickupDate: '',
+      dropoffDate: '',
+      pickupLocation: '',
+      ageOptions: '',
+      driversAge: 18
     }
   },
   mutations: {
