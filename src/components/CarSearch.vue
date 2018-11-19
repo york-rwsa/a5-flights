@@ -2,10 +2,13 @@
   <b-form @submit="searchNow">
     <b-row class="align-items-center">
       <b-col cols="12" md="6">
-        <b-input placeholder="Pickup Location"
-                 tabindex="1"
-                 required
-                 v-model="form.pickupLocation"></b-input>
+        <v-autocomplete
+          placeholder="Pickup Location"
+          required
+          v-model="form.pickupLocation"
+          :items="airports"
+          tabindex="1"
+        ></v-autocomplete>
       </b-col>
       <b-col cols="2" md="2">
         <label for="pickupDate">Pickup Date</label>
@@ -58,6 +61,7 @@
 <script>
 import moment from 'moment'
 import _ from 'lodash'
+import airportJsonData from '@/misc/airports_list.json'
 
 export default {
   data () {
@@ -69,7 +73,8 @@ export default {
         pickupLocation: '',
         ageOptions: _.range(18, 25),
         driversAge: 18
-      }
+      },
+      airports: airportJsonData.data
     }
   },
   methods: {
