@@ -92,13 +92,21 @@ export default {
   data () {
     return {
       cars: [
-        { seats: 2, class: 'Luxury', car: 'Jaguar', image: require('@/assets/cars/Jaguar.png'), priceMul: 2 },
-        { seats: 3, class: 'Van', car: 'Mercedes Sprinter', image: require('@/assets/cars/Mercedes_Sprinter.png'), priceMul: 2 },
-        { seats: 5, class: 'Luxury 4x4', car: 'Range Rover', image: require('@/assets/cars/Range_Rover.png'), priceMul: 2.5 },
-        { seats: 4, class: 'Small Mini', car: 'Toyota Aygo', image: require('@/assets/cars/Toyota_Aygo.png'), priceMul: 0.85 },
-        { seats: 5, class: 'Economy', car: 'Vauxhall Corsa', image: require('@/assets/cars/Vauxhall_Corsa.png'), priceMul: 1 },
-        { seats: 5, class: 'Business', car: 'Vauxhall Insignia', image: require('@/assets/cars/Vauxhall_Insignia.png'), priceMul: 1.5 },
-        { seats: 7, class: 'Large MPV', car: 'Vauxhall Zafira', image: require('@/assets/cars/Vauxhall_Zafira.png'), priceMul: 1.5 }
+        { doors: 2, seats: 2, class: 'Luxury', car: 'Jaguar', image: require('@/assets/cars/Jaguar.png'), priceMul: 2 },
+        { doors: 6, seats: 3, class: 'Van', car: 'Mercedes Sprinter', image: require('@/assets/cars/Mercedes_Sprinter.png'), priceMul: 2 },
+        { doors: 5, seats: 5, class: 'Luxury 4x4', car: 'Range Rover', image: require('@/assets/cars/Range_Rover.png'), priceMul: 2.5 },
+        { doors: 4, seats: 4, class: 'Small Mini', car: 'Toyota Aygo', image: require('@/assets/cars/Toyota_Aygo.png'), priceMul: 0.85 },
+        { doors: 5, seats: 5, class: 'Economy', car: 'Vauxhall Corsa', image: require('@/assets/cars/Vauxhall_Corsa.png'), priceMul: 1 },
+        { doors: 5, seats: 5, class: 'Business', car: 'Vauxhall Insignia', image: require('@/assets/cars/Vauxhall_Insignia.png'), priceMul: 1.5 },
+        { doors: 5, seats: 7, class: 'Large MPV', car: 'Vauxhall Zafira', image: require('@/assets/cars/Vauxhall_Zafira.png'), priceMul: 1.5 }
+      ],
+      companies: [
+        { reviews: 101, rating: 8.5, image: require('@/assets/cars/logos/alamo_logo.gif') },
+        { reviews: 150, rating: 7.6, image: require('@/assets/cars/logos/autovia_logo.gif') },
+        { reviews: 759, rating: 5.4, image: require('@/assets/cars/logos/europcar_logo.gif') },
+        { reviews: 750, rating: 7.5, image: require('@/assets/cars/logos/hertz_logo.gif') },
+        { reviews: 140, rating: 8.0, image: require('@/assets/cars/logos/sixt_logo.gif') },
+        { reviews: 300, rating: 8.3, image: require('@/assets/cars/logos/winrent_logo.gif') }
       ],
       priceMin: 10,
       priceMax: 40,
@@ -121,6 +129,7 @@ export default {
     carWithTransmissionAndPrice () {
       return this.cars.map((car) => {
         car.pricePerDay = (Math.random() * (this.priceMax - this.priceMin) + this.priceMin) * car.priceMul
+        car.company = _.sample(this.companies)
 
         let newcar = []
         newcar.push({ ...car, transmission: 'automatic' })
