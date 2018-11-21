@@ -44,8 +44,7 @@
             <b-img :src="car.company.image"></b-img>
           </b-col>
           <b-col cols="7" offset="2">
-            <span style="font-size: 75%; color: grey;">{{ car.company.reviews }} reviews    </span>
-            <b-btn :variant="ratingVariant" size="sm">{{ car.company.rating }}</b-btn>
+            <car-review-modal :company="car.company" :carID="index"></car-review-modal>
           </b-col>
         </b-row>
       </b-col>
@@ -92,20 +91,16 @@
 </template>
 
 <script>
+import CarReviewModal from '@/components/CarReviewModal'
+
 export default {
   props: {
     car: Object,
     index: Number,
     days: Number
   },
-  computed: {
-    ratingVariant () {
-      if (this.car.company.rating > 7) {
-        return 'success'
-      } else {
-        return 'warning'
-      }
-    } 
+  components: {
+    CarReviewModal
   }
 }
 </script>
