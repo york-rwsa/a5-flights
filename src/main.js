@@ -10,7 +10,7 @@ import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 
-import { Loading } from 'element-ui'
+import { Loading, Rate } from 'element-ui'
 
 import moment from 'moment'
 
@@ -20,6 +20,7 @@ Vue.use(Vuetify)
 
 Vue.use(Loading.directive)
 Vue.prototype.$loading = Loading.service
+Vue.use(Rate)
 
 Vue.filter('normDate', function (value) {
   return moment(value).format('DD/MM/YYYY')
