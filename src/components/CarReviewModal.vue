@@ -10,15 +10,21 @@
               <b-col cols="2">
                 <b-img :src="company.image"></b-img>
               </b-col>
-              <b-col>
+              <b-col cols="10" md="10">
                 <el-rate
-                  class="float-right"
+                  class="d-none d-sm-block mx-auto"
                   v-model="company.rating"
                   disabled
                   show-score
                   score-template="{value} stars"
-                  
                   :max="10"
+                  >
+                </el-rate>
+                <el-rate
+                  class="float-right d-block d-sm-none"
+                  :value="company.rating / 2"
+                  disabled
+                  :max="5"
                   >
                 </el-rate>
               </b-col>
@@ -80,7 +86,7 @@ export default {
       } else {
         return 'warning'
       }
-    } 
+    }
   },
   methods: {
     hideModal () {
