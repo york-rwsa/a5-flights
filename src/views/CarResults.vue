@@ -1,7 +1,10 @@
 <template>
   <b-container>
     <b-row class="align-items-center mt-1">
-      <b-col cols="12" md="6" offset-md="3">
+      <b-col>
+        <b-btn block>View Public Transport Links</b-btn>
+      </b-col>
+      <b-col cols="12" md="6" >
         <b-card>
           <b-row>
             <b-col>
