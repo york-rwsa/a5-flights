@@ -18,6 +18,11 @@ export default new Vuex.Store({
       dropoffDate: '',
       pickupLocation: '',
       driversAge: 18
+    },
+    hotelSearch: {
+      checkin: '',
+      checkout: '',
+      location: ''
     }
   },
   mutations: {
@@ -26,10 +31,14 @@ export default new Vuex.Store({
     },
     updateCarSearch (state, { pickupDate, dropoffDate, pickupLocation, driverOver25, driversAge }) {
       state.carSearch = { pickupDate, dropoffDate, pickupLocation, driverOver25, driversAge }
+    },
+    updateHotelSearch (state, { checkin, checkout, location }) {
+      state.hotelSearch = { checkin, checkout, location }
     }
   },
   getters: {
     search: state => state.flightSearch,
-    carsearch: state => state.carSearch
+    carsearch: state => state.carSearch,
+    hotelsearch: state => state.hotelSearch
   }
 })
