@@ -13,14 +13,14 @@
       <b-col>
         <b-row class="align-items-center">
           <b-col cols="12" md="5" offset-md="1">
-            <label for="pickupDate">Arrival</label>
+            <label for="pickupDate">Check-in</label>
             <b-input id="pickupDate"
                       type="date"
                       v-model="form.pickupDate"
                       tabindex="2"></b-input>
           </b-col>
           <b-col cols="12" md="5" class="mt-2 mt-md-0">
-            <label for="dropoffDate">Departure</label>
+            <label for="dropoffDate">Check-out</label>
             <b-input id="dropoffDate"
                       type="date"
                       v-model="form.dropoffDate"
