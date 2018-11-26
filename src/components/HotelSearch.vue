@@ -54,7 +54,6 @@
 
 <script>
 import moment from 'moment'
-import _ from 'lodash'
 import airportJsonData from '@/misc/airports_list.json'
 
 export default {
@@ -74,7 +73,7 @@ export default {
       this.$store.commit('updateHotelSearch', {
         checkin: this.form.checkin,
         checkout: this.form.checkout,
-        location: this.form.location,
+        location: this.form.location
       })
       this.$router.push('/hotelresults')
     }

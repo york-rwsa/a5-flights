@@ -32,7 +32,7 @@
               <b-col style="border-right: 1px solid #ccc;">
                 <b-row>
                   <b-col>
-                    <span class="price">£</span>
+                    <span class="price">£{{ hotel.pricePerDay * days}}</span>
                   </b-col>
                 </b-row>
                 <b-row>
@@ -77,7 +77,8 @@ export default {
   },
   props: {
     hotel: Object,
-    index: Number
+    index: Number,
+    days: Number
   }
 }
 </script>
