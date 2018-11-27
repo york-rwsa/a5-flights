@@ -49,6 +49,12 @@
     <b-row class="mt-3">
       <b-col><b-button type="submit" variant="primary" class="float-right" tabindex="8">Search Now!</b-button></b-col>
     </b-row>
+
+    <b-alert variant="warning"
+             :show="dateAlert"
+             class="mt-3 mb-0">
+      Checkin date can't be before the checkout date!
+    </b-alert>
   </b-form>
 </template>
 
@@ -64,18 +70,23 @@ export default {
         checkout: moment().add(1, 'days').format('YYYY-MM-DD'),
         location: ''
       },
-      airports: airportJsonData.data
+      airports: airportJsonData.data,
+      dateAlert: false
     }
   },
   methods: {
     searchNow: function (evt) {
       evt.preventDefault()
-      this.$store.commit('updateHotelSearch', {
-        checkin: this.form.checkin,
-        checkout: this.form.checkout,
-        location: this.form.location
-      })
-      this.$router.push('/hotelresults')
+      if (this.form.checkin > this.form.checkout) {
+        this.dateAlert = true
+      } else {
+        this.$store.commit('updateHotelSearch', {
+          checkin: this.form.checkin,
+          checkout: this.form.checkout,
+          location: this.form.location
+        })
+        this.$router.push('/hotelresults')
+      }
     }
   }
 }

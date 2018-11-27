@@ -59,6 +59,12 @@
     <b-row class="mt-3">
       <b-col><b-button type="submit" variant="primary" class="float-right" tabindex="8">Search Now!</b-button></b-col>
     </b-row>
+
+    <b-alert variant="warning"
+             :show="dateAlert"
+             class="mt-3 mb-0">
+      Dropoff date can't be before the pickup date!
+    </b-alert>
   </b-form>
 </template>
 
@@ -78,20 +84,26 @@ export default {
         ageOptions: _.range(18, 25),
         driversAge: 18
       },
+      dateAlert: false,
       airports: airportJsonData.data
     }
   },
   methods: {
     searchNow: function (evt) {
       evt.preventDefault()
-      this.$store.commit('updateCarSearch', {
-        pickupDate: this.form.pickupDate,
-        dropoffDate: this.form.dropoffDate,
-        pickupLocation: this.form.pickupLocation,
-        driverOver25: this.form.driverOver25,
-        driversAge: this.form.driversAge
-      })
-      this.$router.push('/carresults')
+      debugger
+      if (this.form.pickupDate > this.form.dropoffDate) {
+        this.dateAlert = true
+      } else {
+        this.$store.commit('updateCarSearch', {
+          pickupDate: this.form.pickupDate,
+          dropoffDate: this.form.dropoffDate,
+          pickupLocation: this.form.pickupLocation,
+          driverOver25: this.form.driverOver25,
+          driversAge: this.form.driversAge
+        })
+        this.$router.push('/carresults')
+      }
     }
   }
 }

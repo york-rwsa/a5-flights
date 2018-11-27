@@ -47,7 +47,7 @@
                 <label for="from">Return Date</label>
               </b-col>
               <b-col cols="1" class="pl-0 pl-md-3 pr-md-6">
-                <b-btn size="sm" variant="link" @click="addReturn=false">
+                <b-btn size="sm" variant="link" @click="addReturn=false;returnDate=null">
                   <v-icon small>close</v-icon>
                 </b-btn>
               </b-col>
@@ -80,6 +80,12 @@
     <b-row>
       <b-col><b-button type="submit" variant="primary" class="float-right" tabindex="8">Search Now!</b-button></b-col>
     </b-row>
+
+    <b-alert variant="warning"
+             :show="dateAlert"
+             class="mt-3 mb-0">
+      Return date can't be before the departure date!
+    </b-alert>
   </b-form>
 </template>
 
@@ -104,20 +110,25 @@ export default {
         { value: 'Business', text: 'Business' },
         { value: 'First Class', text: 'First Class' }
       ],
-      airports: airportJsonData.data
+      airports: airportJsonData.data,
+      dateAlert: false
     }
   },
   methods: {
     searchNow: function (evt) {
       evt.preventDefault()
-      this.$store.commit('updateSearch', {
-        from: this.from,
-        to: this.to,
-        outboundDate: this.outboundDate,
-        returnDate: this.returnDate,
-        flightClass: this.classSelection
-      })
-      this.$router.push('/flightresults')
+      if (this.outboundDate > this.returnDate) {
+        this.dateAlert = true
+      } else {
+        this.$store.commit('updateSearch', {
+          from: this.from,
+          to: this.to,
+          outboundDate: this.outboundDate,
+          returnDate: this.returnDate,
+          flightClass: this.classSelection
+        })
+        this.$router.push('/flightresults')
+      }
     },
     addReturnDate: function () {
       this.addReturn = true
