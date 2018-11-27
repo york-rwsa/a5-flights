@@ -56,7 +56,7 @@
             </b-row>
             <b-row class="mt-3">
               <b-col>
-                <b-btn block>
+                <b-btn block to="book">
                   Book Now!
                 </b-btn>
               </b-col>
